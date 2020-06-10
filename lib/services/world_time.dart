@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 
 class wordTime{
 
@@ -7,6 +8,7 @@ class wordTime{
   String flag;
   String url;
   String time;
+  bool isDayTime;
 
   wordTime({this.location, this.flag, this.url});
 
@@ -21,7 +23,9 @@ class wordTime{
     DateTime now =DateTime.parse(dateTime);
     now=now.add(Duration(hours: int.parse(offset)));
 
-    time=now.toString();
+    isDayTime=now.hour > 6 && now.hour<20?true:false;
+
+    time=DateFormat.jm().format(now);
   }
 
 }
